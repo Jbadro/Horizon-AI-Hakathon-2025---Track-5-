@@ -1,0 +1,66 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Teacher Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <!-- Auth Status Bar -->
+  <div class="auth-bar">
+    <span>Welcome, {{ current_user.username }}</span>
+    <a href="{{ url_for('logout') }}" class="auth-button">Logout</a>
+  </div>
+
+  <!-- Burger Menu -->
+  <div class="burger-menu" onclick="toggleMenu()">
+    <div class="burger-icon">☰</div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="toggleMenu()">×</span>
+    <a href="#" onclick="loadSection('lesson-plans')">Lesson Plans</a>
+    <a href="#" onclick="loadSection('assessments')">Assessments</a>
+    <a href="#" onclick="loadSection('resources')">Teaching Resources</a>
+    <a href="#" onclick="loadSection('progress')">Student Progress</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content" id="main-content">
+    <h1>Teacher's AI-Enhanced Dashboard</h1>
+
+    <!-- Example Input for Prompt -->
+    <div>
+      <label for="promptInput">Enter your lesson idea or prompt:</label>
+      <textarea id="promptInput" rows="4" cols="50"></textarea>
+    </div>
+    <button id="generateBtn">Generate Lesson Outline</button>
+
+    <!-- Display AI Result -->
+    <div id="aiResult" style="margin-top: 20px;">
+      <h2>AI Output:</h2>
+      <div id="resultText"></div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('main-content').classList.toggle('active');
+    }
+
+    function loadSection(section) {
+      // Handle section loading here
+      console.log('Loading section:', section);
+      // You can implement the logic to load different sections
+      toggleMenu(); // Close menu after selection
+    }
+  </script>
+
+  <!-- Load your JavaScript last to ensure the DOM is ready -->
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
